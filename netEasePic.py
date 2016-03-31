@@ -18,7 +18,7 @@ def getBS(url):
     try:
         html = ul.urlopen(url)
     except HTTPError as e:
-        print 'this page is missing!'
+        print e
     else:
         bs = BeautifulSoup(html,'lxml')
     return bs
