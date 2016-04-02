@@ -12,6 +12,7 @@ Description	: This simple script is created in order to pack the functions I com
 import urllib2 as ul
 from urllib2 import HTTPError
 from bs4 import BeautifulSoup
+from algo import findAll
 import os
 
 def getBS(url):
@@ -27,12 +28,13 @@ def makeFolder(path):
     if os.path.exists(path) == False:
         os.makedirs(path)
 
-def download(link,path,fileNameLoc):
+def download(link,path):
     try:
         html = ul.urlopen(link)
     except HTTPError as e:
         print e
     else:
         content = html.read()
-        with open(path+link[fileNameLoc:],'wb') as code:
+        fileNameLoc = findAll(link,'/')[-1]
+        with open(path+link[fileNameLoc+1:],'wb') as code:
             code.write(content)

@@ -12,30 +12,9 @@ Description	: This simple script to download the photos belong to my favourite p
 import urllib2 as ul
 from urllib2 import HTTPError
 from bs4 import BeautifulSoup
+from net import getBS,makeFolder,download
 import os
 
-def getBS(url):
-    try:
-        html = ul.urlopen(url)
-    except HTTPError as e:
-        print e
-    else:
-        bs = BeautifulSoup(html,'lxml')
-    return bs
-
-def makeFolder(path):
-    if os.path.exists(path) == False:
-        os.makedirs(path)
-
-def download(link,path,fileNameLoc):
-    try:
-        html = ul.urlopen(link)
-    except HTTPError as e:
-        print e
-    else:
-        content = html.read()
-        with open(path+link[fileNameLoc:],'wb') as code:
-            code.write(content)
 
 def downloadPhoto(bs,author,pageIndex,path):
     girl = bs.findAll('img',{"class":"z-tag data-lazyload-src"})
@@ -43,7 +22,7 @@ def downloadPhoto(bs,author,pageIndex,path):
         link = img.get('data-lazyload-src')
         savePath = path+author+'/'+str(pageIndex)+'/'
         fileNameLoc = -15
-        download(link,savePath,fileNameLoc)   
+        download(link,savePath)   
 
 def getNextID(soup):
     content = soup.get_text()
