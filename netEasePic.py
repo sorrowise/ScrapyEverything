@@ -4,7 +4,7 @@
 Script Name: netEasePic.py
 Author:      LURUI
 Created		: 31st March 2016
-Version		: 1.0
+Version		: 1.1
 Description	: This simple script to download the photos belong to my favourite photographers in netEase Photo.
 
 """
